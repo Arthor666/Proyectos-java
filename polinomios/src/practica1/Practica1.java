@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  * @author Arturo
  */
 public class Practica1 {
-
+//Hola, estoy modificando el cdeigazo
     /**
      * @param args the command line arguments
      */
