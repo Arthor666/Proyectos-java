@@ -9,6 +9,7 @@ package practica1;
  *
  * @author Arturo
  */
+//Comentario nuevo
 public class Polinomiodoble {
     int g [] = new int [13];
     public void Polinomiodoble(int a[]){
