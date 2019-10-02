@@ -8,12 +8,13 @@ package practica1;
 import java.util.Random;
 
 public class monomio {
-    private int coeficiente;
-    private int exponente;
+     int coeficiente;
+     int exponente;
     public monomio(){
         Random r = new Random();
         coeficiente=r.nextInt(10);
-        exponente=r.nextInt(6);
+        exponente=r.nextInt(7);
+        System.out.print(this.coeficiente+"X^"+this.exponente+"|");
     }
     
 }

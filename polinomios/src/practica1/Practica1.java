@@ -6,20 +6,25 @@
 package practica1;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 /**
  *
  * @author Arturo
  */
 public class Practica1 extends JFrame implements ActionListener {
+    JButton btn[] = new JButton[5];
+    JLabel jbla = new JLabel();
+    JLabel jblb = new JLabel();
+    JLabel principal = new JLabel();
     public Practica1 (){
         super("Practica1");
-        JButton btn[] = new JButton[5];
         for (int i = 0; i < 5; i++) {
             btn[i]= new JButton();
             btn[i].setLayout(null);
@@ -35,9 +40,17 @@ public class Practica1 extends JFrame implements ActionListener {
         btn[2].setBounds(30,110,140, 30);
         btn[3].setBounds(30,150,100, 30);
         btn[4].setBounds(30,190,100, 30);
+        jbla.setLayout(null);
+        jbla.setBounds(100,30,500,30);
+        jblb.setLayout(null);
+        jblb.setBounds(100,70,500,30);
+        jbla.setFont(new Font("Arial", Font.PLAIN, 15));
+        jblb.setFont(new Font("Arial", Font.PLAIN, 15));
         for (int i = 0; i < 5; i++) {
             add(btn[i]);
         }
+        add(jbla);
+        add(jblb);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
         int height = pantalla.height;
@@ -54,6 +67,18 @@ public class Practica1 extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Object opc = ae.getSource();
+        if(opc==btn[0]){
+            polinomio A = new polinomio();
+            polinomio B = new polinomio();
+            jbla.setText(A.toString());
+            jbla.setVisible(true);
+            jblb.setText(B.toString());
+            jblb.setVisible(true);
+            for (int i = 0; i < 5; i++) {
+                btn[i].setVisible(false);
+            }
+        }
+        
     }
 }
