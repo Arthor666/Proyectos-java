@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class polinomio{
     ArrayList <monomio> mon = new ArrayList();
 	public polinomio(){
-            for(int i=0;i<7;i++){
+            for(int i=0;i<8;i++){
                 this.mon.add(new monomio());
             }
             System.out.println("");

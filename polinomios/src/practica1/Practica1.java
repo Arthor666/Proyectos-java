@@ -10,9 +10,11 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -23,6 +25,8 @@ public class Practica1 extends JFrame implements ActionListener {
     JLabel jbla = new JLabel();
     JLabel jblb = new JLabel();
     JLabel principal = new JLabel();
+    ArrayList <JTextField> respuesta = new ArrayList();
+    ArrayList <JLabel> equis = new ArrayList();
     public Practica1 (){
         super("Practica1");
         for (int i = 0; i < 5; i++) {
@@ -40,15 +44,21 @@ public class Practica1 extends JFrame implements ActionListener {
         btn[2].setBounds(30,110,140, 30);
         btn[3].setBounds(30,150,100, 30);
         btn[4].setBounds(30,190,100, 30);
+        principal.setLayout(null);
+        principal.setBounds(50,0,1000, 30);
+        principal.setText("Bienvenido, Selecciona la opción que desees practicar");
+        principal.setVisible(true);
         jbla.setLayout(null);
         jbla.setBounds(100,30,500,30);
         jblb.setLayout(null);
         jblb.setBounds(100,70,500,30);
         jbla.setFont(new Font("Arial", Font.PLAIN, 15));
         jblb.setFont(new Font("Arial", Font.PLAIN, 15));
+        principal.setFont(new Font("Arial", Font.PLAIN, 15));
         for (int i = 0; i < 5; i++) {
             add(btn[i]);
         }
+        add(principal);
         add(jbla);
         add(jblb);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -71,14 +81,28 @@ public class Practica1 extends JFrame implements ActionListener {
         if(opc==btn[0]){
             polinomio A = new polinomio();
             polinomio B = new polinomio();
-            jbla.setText(A.toString());
+            jbla.setText("A="+A.toString());
             jbla.setVisible(true);
-            jblb.setText(B.toString());
+            jblb.setText("B="+B.toString());
             jblb.setVisible(true);
             for (int i = 0; i < 5; i++) {
                 btn[i].setVisible(false);
             }
+            principal.setText("Escogiste suma, entonces suma A+B");
+            muestra_campos(8);
         }
         
+    }
+    public void muestra_campos(int num){
+        for (int i = 0; i < num; i++) {
+                equis.add(new JLabel());
+                respuesta.add(new JTextField());
+                equis.get(i).setLayout(null);
+                respuesta.get(i).setLayout(null);
+                respuesta.get(i).setBounds(i, i, i, i);
+                equis.get(i).setBounds(i, i, i, i);
+                add(equis.get(i));
+                add(respuesta.get(i));
+            }
     }
 }
