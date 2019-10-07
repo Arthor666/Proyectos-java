@@ -8,10 +8,15 @@ public class polinomio{
             for(int i=0;i<8;i++){
                 this.mon.add(new monomio());
             }
-            System.out.println("");
             junta();
             ordena();
 	}
+        
+        public polinomio(ArrayList <monomio> m){
+            for (int i = 0; i < m.size(); i++) {
+                this.mon.add(m.get(i));
+            }
+        }
         
         public void junta(){
             for (int i = 0; i <this.mon.size(); i++) {
@@ -44,6 +49,28 @@ public class polinomio{
             }
                 aux=0;
         }
+    }
+    public  static polinomio suma(polinomio a, polinomio b){
+        polinomio temp=new polinomio();
+        for (int i = 0; i < 8; i++) {
+            temp.mon.get(i).exponente=i;
+            temp.mon.get(i).coeficiente=0;
+        }
+        for (int i = 0; i <temp.mon.size(); i++) {
+            for (int j = 0; j <b.mon.size(); j++) {
+                if(temp.mon.get(i).exponente==a.mon.get(j).exponente){
+                    temp.mon.get(i).coeficiente+=a.mon.get(j).coeficiente;
+                }
+                if(temp.mon.get(i).exponente==b.mon.get(j).exponente){
+                    temp.mon.get(i).coeficiente+=b.mon.get(j).coeficiente;
+                }
+                
+            }
+        }
+        temp.junta();
+        temp.ordena();
+        return temp;
+        
     }
     @Override
     public String toString(){
@@ -84,5 +111,17 @@ public class polinomio{
         }
         String aux = s.substring(1, s.length());
         return aux;   
+    }
+    public static boolean equals(polinomio a, polinomio b){
+        boolean estado=true;
+        if(a.mon.size()!=b.mon.size()){
+            estado=false;
+        }
+        for (int i = 0; i < a.mon.size(); i++) {
+            if(monomio.notequals(a.mon.get(i),b.mon.get(i))){
+                estado=false;
+            }
+        }
+        return estado;
     }
 }

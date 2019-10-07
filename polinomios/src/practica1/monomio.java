@@ -14,7 +14,17 @@ public class monomio {
         Random r = new Random();
         coeficiente=r.nextInt(10);
         exponente=r.nextInt(7);
-        System.out.print(this.coeficiente+"X^"+this.exponente+"|");
+    }
+    public monomio(int c,int ex){
+        coeficiente=c;
+        exponente=ex;
+    }
+    public static boolean notequals(monomio a, monomio b){
+        boolean estado=true;
+        if(a.coeficiente==b.coeficiente||a.exponente==b.exponente){
+            estado=false;
+        }
+        return estado;
     }
     
 }
