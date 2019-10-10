@@ -5,12 +5,16 @@
             <url>src/practica1/polinomio.java</url>
             <bookmark id="1">
                 <name/>
-                <line>116</line>
+                <line>140</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Arturo/Proyectos-java/polinomios/src/practica1/monomio.java</file>
+            <file>file:/C:/Users/Arturo/Proyectos-java/polinomios/src/practica1/polinomio.java</file>
+            <file>file:/C:/Users/Arturo/Proyectos-java/polinomios/src/practica1/Practica1.java</file>
+        </group>
     </open-files>
 </project-private>

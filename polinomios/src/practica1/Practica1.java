@@ -30,9 +30,16 @@ public class Practica1 extends JFrame implements ActionListener {
     ArrayList <JLabel> equis = new ArrayList();
     JButton revisar = new JButton();
     ArrayList <monomio> monomios = new ArrayList();
-    polinomio A = new polinomio();
-    polinomio B = new polinomio();
+    polinomio A ;
+    polinomio B;
     polinomio Res_verdadero= new polinomio();
+    polinomio Res_usuario;
+    String adicion="Escogiste suma, entonces suma A+B",sustraccion="Escogiste resta, entonces Resta A-B"
+      ,multiplicacion="Escogiste Multiplicacion, entonces Multiplica (A)(B)"
+      ,division="Escogiste Division, entonces Divide A/B"
+      ,teoremaff="Escogiste Teorema Fundamental del Algebra, entonces Encuentra las raices de la siguiente ecuacion",
+            menup="Bienvenido, Selecciona la opción que desees practicar";
+    JButton regresar = new JButton("Regresar");
     public Practica1 (){
         super("Practica1");
         for (int i = 0; i < 5; i++) {
@@ -40,6 +47,11 @@ public class Practica1 extends JFrame implements ActionListener {
             btn[i].setLayout(null);
             btn[i].addActionListener(this);
         }
+        regresar.setLayout(null);
+        regresar.addActionListener(this);
+        regresar.setBounds(230, 200, 100, 30);
+        add(regresar);
+        regresar.setVisible(false);
         revisar.setLayout(null);
         revisar.addActionListener(this);
         revisar.setText("Revisar");
@@ -56,7 +68,7 @@ public class Practica1 extends JFrame implements ActionListener {
         btn[4].setBounds(30,190,100, 30);
         principal.setLayout(null);
         principal.setBounds(50,0,1000, 30);
-        principal.setText("Bienvenido, Selecciona la opción que desees practicar");
+        principal.setText(menup);
         principal.setVisible(true);
         jbla.setLayout(null);
         jbla.setBounds(100,30,500,30);
@@ -91,28 +103,85 @@ public class Practica1 extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         Object opc = ae.getSource();
         if(opc==btn[0]){
+            A = new polinomio();
+            B = new polinomio();
             jbla.setText("A="+A.toString());
             jbla.setVisible(true);
             jblb.setText("B="+B.toString());
             jblb.setVisible(true);
+            regresar.setVisible(true);
             for (int i = 0; i < 5; i++) {
                 btn[i].setVisible(false);
             }
-            principal.setText("Escogiste suma, entonces suma A+B");
+            principal.setText(adicion);
             muestra_campos(7);
             Res_verdadero=polinomio.suma(A,B);
         }
+        if(opc==btn[1]){
+            A = new polinomio();
+            B = new polinomio();
+            jbla.setText("A="+A.toString());
+            jbla.setVisible(true);
+            jblb.setText("B="+B.toString());
+            jblb.setVisible(true);
+            regresar.setVisible(true);
+            for (int i = 0; i < 5; i++) {
+                btn[i].setVisible(false);
+            }
+            principal.setText(sustraccion);
+            muestra_campos(7);
+            Res_verdadero=polinomio.resta(A,B);
+        }
+        if(opc==btn[2]){
+            A=new polinomio();
+            B=new polinomio();
+            jbla.setText("A="+A.toString());
+            jbla.setVisible(true);
+            jblb.setText("B="+B.toString());
+            jblb.setVisible(true);
+            regresar.setVisible(true);
+            for (int i = 0; i < 5; i++) {
+                btn[i].setVisible(false);
+            }
+            principal.setText(multiplicacion);
+            muestra_campos(13);
+            Res_verdadero=polinomio.multiplica(A,B);
+            System.out.println("A "+A);
+            System.out.println("B "+B);
+        }
+        if(opc==btn[3]){
+            
+            jbla.setText("A="+A.toString());
+            jbla.setVisible(true);
+            jblb.setText("B="+B.toString());
+            jblb.setVisible(true);
+            regresar.setVisible(true);
+            for (int i = 0; i < 5; i++) {
+                btn[i].setVisible(false);
+            }
+            principal.setText(division);
+            muestra_campos(13);
+            //Res_verdadero=polinomio.division(A,B);
+            System.out.println("A "+A);
+            System.out.println("B "+B);
+        }
+        System.out.println(Res_verdadero);
         if(opc==revisar){
             for (int i = 0; i <respuesta.size(); i++) {
                 monomios.add(new monomio(Integer.parseInt(respuesta.get(i).getText()),(respuesta.size()-i-1)));
             }
-            polinomio Res_usuario = new polinomio(monomios);
-            System.out.println(Res_verdadero);
+            Res_usuario = new polinomio(monomios);
             if(polinomio.equals(Res_usuario,Res_verdadero)){
                 JOptionPane.showMessageDialog(null,"Felicidades, el resultado es correcto");
+                back();
+            }else{
+                JOptionPane.showMessageDialog(null,"Siguelo intentando");    
             }
+            limpiar();
         }
-        
+        if(opc==regresar){
+            back();
+        }
     }
     public void muestra_campos(int num){
         int x=10;
@@ -130,6 +199,7 @@ public class Practica1 extends JFrame implements ActionListener {
                 x+=50;
                 equis.get(i).setFont(new Font("Arial", Font.PLAIN, 15));
             }
+        
         String s="";
         if(num==7){
             equis.get(0).setText("x"+"\u2076");
@@ -140,7 +210,47 @@ public class Practica1 extends JFrame implements ActionListener {
             equis.get(5).setText("x");
             equis.get(6).setText("");
         }
+        if(num==13){
+            equis.get(0).setText("x"+"\u00B9"+"\u00B2");
+            equis.get(1).setText("x"+"\u00B9"+"\u00B9");
+            equis.get(2).setText("x"+"\u00B9"+"\u2070");
+            equis.get(3).setText("x"+"\u2079");
+            equis.get(4).setText("x"+"\u2078");
+            equis.get(5).setText("x"+"\u2077");
+            equis.get(6).setText("x"+"\u2076");
+            equis.get(7).setText("x"+"\u2075");
+            equis.get(8).setText("x"+"\u2074");
+            equis.get(9).setText("x"+"\u00B3");
+            equis.get(10).setText("x"+"\u00B2");
+            equis.get(11).setText("x");
+            equis.get(12).setText("");
+            
+        }
         revisar.setVisible(true);
         
     }
+    public void back(){
+        for (int i = 0; i < respuesta.size(); i++) {
+           equis.get(i).setVisible(false);
+           respuesta.get(i).setVisible(false);
+           
+        }
+        jbla.setVisible(false);
+        jblb.setVisible(false);
+       revisar.setVisible(false);
+       regresar.setVisible(false);
+       principal.setText(menup);
+        for (int i = 0; i < btn.length; i++) {
+            btn[i].setVisible(true);
+        }
+        respuesta.clear();
+        equis.clear();
+        limpiar();
+    }
+    public void limpiar(){
+        Res_usuario.mon.clear();
+        monomios.clear();
+    }
+    
+
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class polinomio{
     ArrayList <monomio> mon = new ArrayList();
 	public polinomio(){
-            for(int i=0;i<8;i++){
+            for(int i=0;i<7;i++){
                 this.mon.add(new monomio());
             }
             junta();
@@ -52,7 +52,7 @@ public class polinomio{
     }
     public  static polinomio suma(polinomio a, polinomio b){
         polinomio temp=new polinomio();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i <7; i++) {
             temp.mon.get(i).exponente=i;
             temp.mon.get(i).coeficiente=0;
         }
@@ -72,12 +72,58 @@ public class polinomio{
         return temp;
         
     }
+    public  static polinomio resta(polinomio a, polinomio b){
+        polinomio temp=new polinomio();
+        for (int i = 0; i <7; i++) {
+            temp.mon.get(i).exponente=i;
+            temp.mon.get(i).coeficiente=0;
+        }
+        for (int i = 0; i <temp.mon.size(); i++) {
+            for (int j = 0; j <b.mon.size(); j++) {
+                if(temp.mon.get(i).exponente==a.mon.get(j).exponente){
+                    temp.mon.get(i).coeficiente+=a.mon.get(j).coeficiente;
+                }
+                if(temp.mon.get(i).exponente==b.mon.get(j).exponente){
+                    temp.mon.get(i).coeficiente-=b.mon.get(j).coeficiente;
+                }
+                
+            }
+        }
+        temp.junta();
+        temp.ordena();
+        return temp;
+        
+    }
+    public static polinomio multiplica(polinomio a, polinomio b){
+        polinomio temp = new polinomio();
+        temp.mon.clear();
+        for (int i = 0; i < a.mon.size(); i++) {
+            for (int j = 0; j <a.mon.size(); j++) {
+                 temp.mon.add(monomio.multiplicar(a.mon.get(i),b.mon.get(j)));
+            }
+        }
+        temp.junta();
+        temp.ordena();
+        polinomio auxiliar = new polinomio();
+        auxiliar.mon.clear();
+        for (int i = 0; i < temp.mon.size(); i++) {
+            if (temp.mon.get(i).coeficiente!=0) {
+                auxiliar.mon.add(temp.mon.get(i));
+            }
+        }
+        return auxiliar;
+    }
     @Override
     public String toString(){
         String s="";
         for (int i = 0; i < this.mon.size(); i++) {
             if(this.mon.get(i).coeficiente!=0){
-                s+="+"+this.mon.get(i).coeficiente+"x";
+                if(this.mon.get(i).coeficiente<0){
+                    s+="";
+                }else{
+                    s+="+";
+                } 
+                s+=this.mon.get(i).coeficiente+"x";
                 switch(this.mon.get(i).exponente){
                     case 0:
                     s=s.substring(0,s.length()-1);
@@ -106,6 +152,16 @@ public class polinomio{
                     case 9:
                         s+="\u2079";
                     break;
+                    case 10:
+                        s+="\u00B9"+"\u2070";
+                    break;
+                    case 11:
+                        s+="\u00B9"+"\u00B9";
+                    break;
+                    case 12:
+                        s+="\u00B9"+"\u00B2";
+                    break;
+                    
                 }
             }
         }
@@ -114,13 +170,8 @@ public class polinomio{
     }
     public static boolean equals(polinomio a, polinomio b){
         boolean estado=true;
-        if(a.mon.size()!=b.mon.size()){
+        if(!a.toString().equals(b.toString())){
             estado=false;
-        }
-        for (int i = 0; i < a.mon.size(); i++) {
-            if(monomio.notequals(a.mon.get(i),b.mon.get(i))){
-                estado=false;
-            }
         }
         return estado;
     }

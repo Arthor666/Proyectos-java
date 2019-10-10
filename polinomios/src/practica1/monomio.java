@@ -19,12 +19,11 @@ public class monomio {
         coeficiente=c;
         exponente=ex;
     }
-    public static boolean notequals(monomio a, monomio b){
-        boolean estado=true;
-        if(a.coeficiente==b.coeficiente||a.exponente==b.exponente){
-            estado=false;
-        }
-        return estado;
+    public static monomio multiplicar(monomio a, monomio b){
+        monomio aux= new monomio();
+        aux.coeficiente=a.coeficiente*b.coeficiente;
+        aux.exponente=a.exponente+b.exponente;
+        return aux;
     }
     
 }
