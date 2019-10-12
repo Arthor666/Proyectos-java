@@ -1,6 +1,7 @@
 package practica1;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class polinomio{
     ArrayList <monomio> mon = new ArrayList();
@@ -11,6 +12,36 @@ public class polinomio{
             junta();
             ordena();
 	}
+        public polinomio(int a){
+            Random r= new Random();
+            int coeficiente,exponente;
+            exponente=r.nextInt(3);
+            coeficiente=r.nextInt(4);
+            if(coeficiente==0){
+            coeficiente=r.nextInt(4);    
+            }
+            if(exponente==0){
+            exponente=r.nextInt(3);    
+            }
+            this.mon.add(new monomio(coeficiente, exponente));
+            if(this.mon.get(0).exponente==2){
+                coeficiente=r.nextInt(4);
+                if(coeficiente==0){
+                    coeficiente=r.nextInt(4);
+                }
+                this.mon.add(new monomio(coeficiente, 1));
+            }
+            do{
+                coeficiente=r.nextInt(4);
+            }while(coeficiente<0); 
+            if(r.nextInt(2)==0){
+                coeficiente*=-1;
+            }
+            this.mon.add(new monomio(coeficiente,0));
+            
+            this.junta();
+            this.ordena();
+        }
         
         public polinomio(ArrayList <monomio> m){
             for (int i = 0; i < m.size(); i++) {
@@ -98,7 +129,7 @@ public class polinomio{
         polinomio temp = new polinomio();
         temp.mon.clear();
         for (int i = 0; i < a.mon.size(); i++) {
-            for (int j = 0; j <a.mon.size(); j++) {
+            for (int j = 0; j <b.mon.size(); j++) {
                  temp.mon.add(monomio.multiplicar(a.mon.get(i),b.mon.get(j)));
             }
         }
@@ -113,6 +144,19 @@ public class polinomio{
         }
         return auxiliar;
     }
+    
+    public static polinomio div_res(int indice){
+        polinomio temp = new polinomio();
+        temp.mon.clear();
+        for (int i = 0; i <indice; i++) {
+            temp.mon.add(new monomio(i));
+        }
+        temp.junta();
+        temp.ordena();
+        return temp;
+    }
+    
+    
     @Override
     public String toString(){
         String s="";

@@ -19,6 +19,13 @@ public class monomio {
         coeficiente=c;
         exponente=ex;
     }
+    public monomio(int ex){
+        Random r = new Random();
+        do{
+            coeficiente=r.nextInt(10);
+        }while(coeficiente<0);
+        exponente=ex;
+    }
     public static monomio multiplicar(monomio a, monomio b){
         monomio aux= new monomio();
         aux.coeficiente=a.coeficiente*b.coeficiente;
