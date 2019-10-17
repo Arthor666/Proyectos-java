@@ -4,6 +4,39 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class polinomio{
+
+    public static polinomio deriva(polinomio A) {
+        polinomio aux = new polinomio();
+        aux.mon.clear();
+        for (int i = 0; i < A.mon.size(); i++) {
+            int coeficiente=0;
+            int exponente=0;
+            if(A.mon.get(i).exponente==0){
+                coeficiente=0;
+                exponente=0;
+            }else{
+                 coeficiente=A.mon.get(i).coeficiente*A.mon.get(i).exponente;
+                 exponente=A.mon.get(i).exponente-1;
+            }
+            aux.mon.add(new monomio(coeficiente,exponente));
+        }
+        return aux;
+    }
+
+    static polinomio integra(polinomio A) {
+        polinomio aux = new polinomio();
+        aux.mon.clear();
+        for (int i = 0; i < A.mon.size(); i++) {
+            int coeficiente=0;
+            int exponente=0;
+            
+                 coeficiente=(int)A.mon.get(i).coeficiente/(A.mon.get(i).exponente+1);
+                 exponente=A.mon.get(i).exponente+1;
+            aux.mon.add(new monomio(coeficiente,exponente));
+        }
+        return aux;
+        
+    }
     ArrayList <monomio> mon = new ArrayList();
 	public polinomio(){
             for(int i=0;i<7;i++){

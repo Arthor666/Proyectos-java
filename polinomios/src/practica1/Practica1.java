@@ -23,7 +23,7 @@ import javax.swing.JTextField;
  * @author Arturo
  */
 public class Practica1 extends JFrame implements ActionListener {
-    JButton btn[] = new JButton[5];
+    JButton btn[] = new JButton[7];
     JLabel jbla = new JLabel();
     JLabel jblb = new JLabel();
     JLabel principal = new JLabel();
@@ -47,7 +47,7 @@ public class Practica1 extends JFrame implements ActionListener {
     JButton revisar2 = new JButton();
     public Practica1 (){
         super("Practica1");
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 7; i++) {
             btn[i]= new JButton();
             btn[i].setLayout(null);
             btn[i].addActionListener(this);
@@ -70,11 +70,15 @@ public class Practica1 extends JFrame implements ActionListener {
         btn[2].setText("Multiplicación");
         btn[3].setText("División");
         btn[4].setText("Teorema Fundamental del calculo");
+        btn[5].setText("Diferencial");
+        btn[6].setText("Integral");
         btn[0].setBounds(30,30,100, 30);
         btn[1].setBounds(30,70,100, 30);
         btn[2].setBounds(30,110,140, 30);
         btn[3].setBounds(30,150,100, 30);
         btn[4].setBounds(30,190,100, 30);
+        btn[5].setBounds(30,230,100, 30);
+        btn[6].setBounds(30,270,100, 30);
         principal.setLayout(null);
         principal.setBounds(50,0,1000, 30);
         principal.setText(menup);
@@ -86,7 +90,7 @@ public class Practica1 extends JFrame implements ActionListener {
         jbla.setFont(new Font("Arial", Font.PLAIN, 15));
         jblb.setFont(new Font("Arial", Font.PLAIN, 15));
         principal.setFont(new Font("Arial", Font.PLAIN, 15));
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 7; i++) {
             add(btn[i]);
         }
         add(principal);
@@ -121,7 +125,7 @@ public class Practica1 extends JFrame implements ActionListener {
             jblb.setText("B="+B.toString());
             jblb.setVisible(true);
             regresar.setVisible(true);
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 7; i++) {
                 btn[i].setVisible(false);
             }
             principal.setText(adicion);
@@ -137,7 +141,7 @@ public class Practica1 extends JFrame implements ActionListener {
             jblb.setText("B="+B.toString());
             jblb.setVisible(true);
             regresar.setVisible(true);
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 7; i++) {
                 btn[i].setVisible(false);
             }
             principal.setText(sustraccion);
@@ -153,7 +157,7 @@ public class Practica1 extends JFrame implements ActionListener {
             jblb.setText("B="+B.toString());
             jblb.setVisible(true);
             regresar.setVisible(true);
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 7; i++) {
                 btn[i].setVisible(false);
             }
             principal.setText(multiplicacion);
@@ -180,7 +184,7 @@ public class Practica1 extends JFrame implements ActionListener {
             jblb.setText("B="+B.toString());
             jblb.setVisible(true);
             regresar.setVisible(true);
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 7; i++) {
                 btn[i].setVisible(false);
             }
             principal.setText(division);
@@ -199,7 +203,7 @@ public class Practica1 extends JFrame implements ActionListener {
             A=polinomio.multiplica(A,binomios.get(2));
             jbla.setText(A.toString()+"=0");
             muestra_campos(A.mon.get(0).exponente);
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 7; i++) {
                 btn[i].setVisible(false);
             }
             for (int i = 0; i < binomios.size(); i++) {
@@ -214,6 +218,32 @@ public class Practica1 extends JFrame implements ActionListener {
             revisar2.setVisible(true);
             
             
+        }
+        if(opc==btn[5]){
+            jbla.setVisible(true);
+             A=new polinomio();
+            jbla.setText("A="+A.toString());
+            regresar.setVisible(true);
+            for (int i = 0; i < 7; i++) {
+                btn[i].setVisible(false);
+            }
+            principal.setText("Escogiste Diferencial, entonces diferencia A");
+            muestra_campos(7);
+            Res_verdadero=polinomio.deriva(A);
+            System.out.println(Res_verdadero);
+        }
+        if(opc==btn[6]){
+            jbla.setVisible(true);
+             A=new polinomio();
+            jbla.setText("A="+A.toString());
+            regresar.setVisible(true);
+            for (int i = 0; i < 7; i++) {
+                btn[i].setVisible(false);
+            }
+            principal.setText("Escogiste Integral, entonces Integra A");
+            muestra_campos(7);
+            Res_verdadero=polinomio.integra(A);
+            System.out.println(Res_verdadero);
         }
         
         if(opc==revisar){
