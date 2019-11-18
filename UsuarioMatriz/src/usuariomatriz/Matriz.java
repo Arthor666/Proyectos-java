@@ -70,8 +70,8 @@ public class Matriz {
     public static Matriz sumar(Matriz a, Matriz b){
         if(a.ren==b.ren&&a.col==b.col){
          Matriz auxiliar = new Matriz(a.ren,a.col, "Resultado");
-            for (int i = 0; i < 10; i++) {
-                for (int j = 0; j < 10; j++) {
+            for (int i = 0; i < a.ren; i++) {
+                for (int j = 0; j <a.col; j++) {
                     auxiliar.a[i][j]=a.a[i][j].sumar(b.a[i][j]);
                 }
             }
