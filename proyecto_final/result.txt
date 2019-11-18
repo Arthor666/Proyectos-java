@@ -1,0 +1,1 @@
+Este texto será escrito en el fichero de salida
