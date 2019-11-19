@@ -46,7 +46,7 @@ public class servidor {
         
                // Creamos flujo de salida, este flujo nos sirve para 
                // indicar donde guardaremos el archivo
-               FileOutputStream fos = new FileOutputStream("C:/Users/"+System.getProperty("user.name")+"/Downloads"+nombreArchivo );
+               FileOutputStream fos = new FileOutputStream("C:/Users/ale_m/Downloads/"+nombreArchivo );
                BufferedOutputStream out = new BufferedOutputStream(fos);
                BufferedInputStream in = new BufferedInputStream(cliente.getInputStream());
  

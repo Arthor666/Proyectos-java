@@ -22,6 +22,7 @@ public class Proyecto_final extends Thread{
         } catch (IOException ex) {
             Logger.getLogger(Proyecto_final.class.getName()).log(Level.SEVERE, null, ex);
         }
+         
     }
 
     @Override

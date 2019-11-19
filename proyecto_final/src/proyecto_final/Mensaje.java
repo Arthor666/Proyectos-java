@@ -28,17 +28,26 @@ public class Mensaje implements Serializable {
    static private String destino;
    private String mensaje;
    private RSA rsa;
+    private static final long serialVersionUID = 33l;
+   public Mensaje(){
+   }
    public Mensaje(String Mensaje, String destino,RSA rsa) throws FileNotFoundException, IOException{
        this.mensaje=Mensaje;
        this.rsa=rsa;
        this.destino=destino;
-       FileOutputStream fos = new FileOutputStream("C:/Users/arturo briones/Downloads/archivo.txt");
+       FileOutputStream fos = new FileOutputStream("C:/Users/ale_m/Downloads/archivo.ddr");
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(this);
         oos.close();
         enviar();
    }
-
+   
+   public String getMensaje(){
+       return this.mensaje;
+   }
+   public RSA getllave(){
+       return this.rsa;
+   }
     private void enviar() {
          try
           {
@@ -52,7 +61,7 @@ public class Mensaje implements Serializable {
             socket.setKeepAlive( true );
          
             // Creamos el archivo que vamos a enviar
-            File archivo = new File("C:/Users/arturo briones/Downloads/archivo.txt");
+            File archivo = new File("C:/Users/ale_m/Downloads/archivo.ddr");
          
             // Obtenemos el tamaño del archivo
             int tamañoArchivo = ( int )archivo.length();
@@ -71,7 +80,7 @@ public class Mensaje implements Serializable {
             dos.writeInt( tamañoArchivo );
          
             // Creamos flujo de entrada para realizar la lectura del archivo en bytes
-            FileInputStream fis = new FileInputStream("C:/Users/"+System.getProperty("user.name")+"/Downloads/archivo.txt");
+            FileInputStream fis = new FileInputStream("C:/Users/ale_m/Downloads/archivo.ddr");
             BufferedInputStream bis = new BufferedInputStream( fis );
          
             // Creamos el flujo de salida para enviar los datos del archivo en bytes
