@@ -56,4 +56,12 @@ public class RSA implements Serializable{
         
         return new String(decriptCipher.doFinal(bytes), UTF_8);
     }
+    public static String sacar_mensaje(String ruta) throws FileNotFoundException, NoSuchAlgorithmException, IOException, ClassNotFoundException{
+        ObjectInputStream archivo = new ObjectInputStream(new FileInputStream(ruta));
+        Mensaje m = new Mensaje();
+        RSA llave = new RSA();
+                m=(Mensaje)archivo.readObject();
+        archivo.close();
+        return m.getMensaje();
+    }
 }

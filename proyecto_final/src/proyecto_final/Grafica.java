@@ -30,6 +30,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -40,6 +42,8 @@ public class Grafica extends JFrame implements ActionListener {
     private static JTextField receptor = new JTextField();
     private static TextArea txt = new TextArea();
     private static JButton Desencriptar = new JButton("Desencriptar");
+    private static JButton original= new JButton("Ver mensaje Original");
+   
     
     public Grafica(){
         String ip ="";
@@ -56,6 +60,7 @@ public class Grafica extends JFrame implements ActionListener {
         //ActionListener
         enviar.addActionListener(this);
         Desencriptar.addActionListener(this);
+        original.addActionListener(this);
         
         //Coordenadas
         tuip.setBounds(0,0, 500, 20);
@@ -64,6 +69,7 @@ public class Grafica extends JFrame implements ActionListener {
         enviar.setBounds(550, 300, 100, 20);
         paraip.setBounds(450, 50, 200, 20);
         Desencriptar.setBounds(700, 300, 120,20);
+        original.setBounds(600, 400, 150, 20);
         
         //Hacerlos visibles
         txt.setVisible(true);
@@ -72,6 +78,7 @@ public class Grafica extends JFrame implements ActionListener {
         enviar.setVisible(true);
         paraip.setVisible(true);
         Desencriptar.setVisible(true);
+        original.setVisible(true);
         
         //Layout
         paraip.setLayout(null);
@@ -79,6 +86,7 @@ public class Grafica extends JFrame implements ActionListener {
         receptor.setLayout(null);
         enviar.setLayout(null);
         Desencriptar.setLayout(null);
+        original.setLayout(null);
      
         //Agregar al JFrame
         add(paraip);
@@ -87,6 +95,7 @@ public class Grafica extends JFrame implements ActionListener {
         add(receptor);
         add(enviar);
         add(Desencriptar);
+        add(original);
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
@@ -131,7 +140,8 @@ public class Grafica extends JFrame implements ActionListener {
       
         }
         if(opc==Desencriptar){
-            JFileChooser buscador = new JFileChooser("txt");
+            JFileChooser buscador = new JFileChooser();
+            buscador.setFileFilter(new FileNameExtensionFilter("DDR","ddr"));
             Scanner scn=null;
             String ruta="";
             int valor = buscador.showOpenDialog(buscador);
@@ -172,6 +182,42 @@ public class Grafica extends JFrame implements ActionListener {
                 Logger.getLogger(Grafica.class.getName()).log(Level.SEVERE, null, ex);
             }
             txt.setText(mensaje_desencriptado);
+        }
+        if(opc==original){
+            JFileChooser buscador = new JFileChooser();
+            buscador.setFileFilter(new FileNameExtensionFilter("DDR","ddr"));
+            Scanner scn=null;
+            String ruta="";
+            int valor = buscador.showOpenDialog(buscador);
+            if (valor == JFileChooser.APPROVE_OPTION) {
+                 ruta = buscador.getSelectedFile().getAbsolutePath();
+                    try {
+                        File f = new File(ruta);
+                        scn = new Scanner(f);
+                        while (scn.hasNext()) {
+                            System.out.println(scn.nextLine());
+                        }
+                    } catch (FileNotFoundException e) {
+                System.out.println(e.getMessage());
+                } finally {
+                    if (scn != null) {
+                        scn.close();
+                    }
+                }
+            } else {
+                System.out.println("No se ha seleccionado ningún fichero");
+            }
+            String mensaje_encriptado="";
+            try {
+                mensaje_encriptado=RSA.sacar_mensaje(ruta);
+            } catch (IOException ex) {
+                Logger.getLogger(Grafica.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Grafica.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(Grafica.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            txt.setText(mensaje_encriptado);
         }
     }
     
