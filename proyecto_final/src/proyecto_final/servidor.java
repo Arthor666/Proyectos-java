@@ -8,16 +8,19 @@ package proyecto_final;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author arturo briones
  */
 public class servidor {
+    private static String ruta=System.getProperty("user.dir")+"/";
     private ServerSocket servidor = null;
     public servidor() throws IOException{
         servidor = new ServerSocket( 4400 );
@@ -41,12 +44,20 @@ public class servidor {
  
                // Obtenemos el tamaño del archivo
                int tam = dis.readInt(); 
- 
-               System.out.println( "Recibiendo archivo "+nombreArchivo );
-        
+
+                JOptionPane.showMessageDialog(null,"Esta recibiendo un archivo");
                // Creamos flujo de salida, este flujo nos sirve para 
                // indicar donde guardaremos el archivo
-               FileOutputStream fos = new FileOutputStream("C:/Users/ale_m/Downloads/"+nombreArchivo );
+                File f = new File(ruta+nombreArchivo);
+                int y=1;
+                while(f.exists()) {
+                    f= new File(ruta+"("+y+")"+nombreArchivo);
+                    
+                    y++;
+                }
+                
+               FileOutputStream fos = new FileOutputStream(f);
+               
                BufferedOutputStream out = new BufferedOutputStream(fos);
                BufferedInputStream in = new BufferedInputStream(cliente.getInputStream());
  

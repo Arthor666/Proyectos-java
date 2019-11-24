@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.InvalidKeyException;
-import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -30,7 +29,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -141,6 +139,7 @@ public class Grafica extends JFrame implements ActionListener {
         }
         if(opc==Desencriptar){
             JFileChooser buscador = new JFileChooser();
+            buscador.setCurrentDirectory(new File(System.getProperty("user.dir")));
             buscador.setFileFilter(new FileNameExtensionFilter("DDR","ddr"));
             Scanner scn=null;
             String ruta="";
@@ -186,6 +185,7 @@ public class Grafica extends JFrame implements ActionListener {
         if(opc==original){
             JFileChooser buscador = new JFileChooser();
             buscador.setFileFilter(new FileNameExtensionFilter("DDR","ddr"));
+            buscador.setCurrentDirectory(new File(System.getProperty("user.dir")));
             Scanner scn=null;
             String ruta="";
             int valor = buscador.showOpenDialog(buscador);

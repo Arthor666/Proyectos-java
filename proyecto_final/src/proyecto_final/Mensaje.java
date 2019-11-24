@@ -28,14 +28,15 @@ public class Mensaje implements Serializable {
    static private String destino;
    private String mensaje;
    private RSA rsa;
-    private static final long serialVersionUID = 33l;
+   private static final long serialVersionUID = 33l;
+   private static String ruta=System.getProperty("user.dir")+"/";
    public Mensaje(){
    }
    public Mensaje(String Mensaje, String destino,RSA rsa) throws FileNotFoundException, IOException{
        this.mensaje=Mensaje;
        this.rsa=rsa;
        this.destino=destino;
-       FileOutputStream fos = new FileOutputStream("C:/Users/ale_m/Downloads/archivo.ddr");
+       FileOutputStream fos = new FileOutputStream(ruta+"archivo.ddr");
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(this);
         oos.close();
@@ -61,7 +62,7 @@ public class Mensaje implements Serializable {
             socket.setKeepAlive( true );
          
             // Creamos el archivo que vamos a enviar
-            File archivo = new File("C:/Users/ale_m/Downloads/archivo.ddr");
+            File archivo = new File(ruta+"archivo.ddr");
          
             // Obtenemos el tamaño del archivo
             int tamañoArchivo = ( int )archivo.length();
@@ -80,7 +81,7 @@ public class Mensaje implements Serializable {
             dos.writeInt( tamañoArchivo );
          
             // Creamos flujo de entrada para realizar la lectura del archivo en bytes
-            FileInputStream fis = new FileInputStream("C:/Users/ale_m/Downloads/archivo.ddr");
+            FileInputStream fis = new FileInputStream(ruta+"archivo.ddr");
             BufferedInputStream bis = new BufferedInputStream( fis );
          
             // Creamos el flujo de salida para enviar los datos del archivo en bytes
