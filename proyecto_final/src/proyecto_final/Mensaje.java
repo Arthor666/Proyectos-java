@@ -19,6 +19,9 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,10 +33,16 @@ public class Mensaje implements Serializable {
    private RSA rsa;
    private static final long serialVersionUID = 33l;
    private static String ruta=System.getProperty("user.dir")+"/";
+   private static String ip;
    public Mensaje(){
    }
    public Mensaje(String Mensaje, String destino,RSA rsa) throws FileNotFoundException, IOException{
-       this.mensaje=Mensaje;
+        try {
+          ip=InetAddress.getLocalHost().getHostAddress();
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Grafica.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       this.mensaje=Mensaje+"\n\n Envia: "+ip;
        this.rsa=rsa;
        this.destino=destino;
        FileOutputStream fos = new FileOutputStream(ruta+"archivo.ddr");
