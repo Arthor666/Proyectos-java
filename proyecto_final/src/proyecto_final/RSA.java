@@ -50,7 +50,7 @@ public class RSA implements Serializable{
         RSA llave = new RSA();
                 m=(Mensaje)archivo.readObject();
         archivo.close();
-        byte[] bytes = Base64.getDecoder().decode(m.getMensaje());
+        byte[] bytes = Base64.getDecoder().decode(m.getMensaje()+m.getip());
         Cipher decriptCipher = Cipher.getInstance("RSA");
         decriptCipher.init(Cipher.DECRYPT_MODE, m.getllave().llaves.getPrivate());
         
@@ -62,6 +62,6 @@ public class RSA implements Serializable{
         RSA llave = new RSA();
                 m=(Mensaje)archivo.readObject();
         archivo.close();
-        return m.getMensaje();
+        return m.getMensaje()+m.getip();
     }
 }

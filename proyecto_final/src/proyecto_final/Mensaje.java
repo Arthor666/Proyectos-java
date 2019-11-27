@@ -25,17 +25,18 @@ import java.net.Socket;
  * @author arturo briones
  */
 public class Mensaje implements Serializable {
-   static private String destino;
+   static private String destino,origen;
    private String mensaje;
    private RSA rsa;
    private static final long serialVersionUID = 33l;
    private static String ruta=System.getProperty("user.dir")+"/";
    public Mensaje(){
    }
-   public Mensaje(String Mensaje, String destino,RSA rsa) throws FileNotFoundException, IOException{
+   public Mensaje(String Mensaje, String destino,RSA rsa,String origen) throws FileNotFoundException, IOException{
        this.mensaje=Mensaje;
        this.rsa=rsa;
        this.destino=destino;
+       this.origen=origen;
        FileOutputStream fos = new FileOutputStream(ruta+"archivo.ddr");
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(this);
@@ -109,6 +110,10 @@ public class Mensaje implements Serializable {
           {
             System.out.println( e.toString() );
           }
+    }
+
+    String getip() {
+        return origen;
     }
 
 }
