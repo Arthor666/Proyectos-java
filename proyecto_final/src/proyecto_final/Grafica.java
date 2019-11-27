@@ -41,10 +41,10 @@ public class Grafica extends JFrame implements ActionListener {
     private static TextArea txt = new TextArea();
     private static JButton Desencriptar = new JButton("Desencriptar");
     private static JButton original= new JButton("Ver mensaje Original");
-   private static String ip;
+   
     
     public Grafica(){
-         ip ="";
+        String ip ="";
         try {
           ip=InetAddress.getLocalHost().getHostAddress();
         } catch (UnknownHostException ex) {
@@ -131,7 +131,7 @@ public class Grafica extends JFrame implements ActionListener {
                 Logger.getLogger(Grafica.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                Mensaje m =  new Mensaje(msj_rsa,receptor.getText(),r,ip);
+                Mensaje m =  new Mensaje(msj_rsa,receptor.getText(),r);
             } catch (IOException ex) {
                 Logger.getLogger(Grafica.class.getName()).log(Level.SEVERE, null, ex);
             }
